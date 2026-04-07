@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 /* ── 데이터 ── */
 const PROBLEMS = [
   { icon: "💸", text: "연간권 선결제가 부담스럽다" },
