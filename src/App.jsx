@@ -1,4 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
+
 /* ── 데이터 ── */
 const PROBLEMS = [
   { icon: "💸", text: "연간권 선결제가 부담스럽다" },
