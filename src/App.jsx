@@ -459,16 +459,16 @@ export default function App() {
             </p>
             {notifyStatus !== "success" ? (
               <>
-                <div style={{ display: "flex", gap: 8, maxWidth: 420, margin: "0 auto" }}>
+                <div style={{ maxWidth: 420, margin: "0 auto" }}>
                   <input
                     type="email" value={email} onChange={e => setEmail(e.target.value)}
                     onKeyDown={e => e.key === "Enter" && handleNotifySubmit()}
                     placeholder="이메일 주소" disabled={notifyStatus === "loading"}
-                    style={{ flex: 1, border: "1.5px solid #e0e0e0", borderRadius: 10, padding: "13px 16px", fontSize: "0.9rem" }}
+                    style={{ width: "100%", border: "1.5px solid #e0e0e0", borderRadius: 10, padding: "13px 16px", fontSize: "0.9rem", marginBottom: 10 }}
                   />
                   <button onClick={handleNotifySubmit} disabled={notifyStatus === "loading"}
-                    className="btn-primary" style={{ padding: "13px 20px", borderRadius: 10, whiteSpace: "nowrap" }}>
-                    {notifyStatus === "loading" ? "..." : "신청하기"}
+                    className="btn-primary" style={{ width: "100%", padding: "13px 20px", borderRadius: 10 }}>
+                    {notifyStatus === "loading" ? "..." : "오픈 알림 신청하기"}
                   </button>
                 </div>
                 {notifyStatus === "error" && (
