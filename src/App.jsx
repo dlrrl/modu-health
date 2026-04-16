@@ -8,12 +8,12 @@ const supabase = createClient(
 
 /* ── 데이터 ── */
 const GYM_VALUES = [
-  { icon: "🎯", title: "입점비 0원", desc: "제휴 등록에 별도 비용이 없습니다. 부담 없이 먼저 경험해보세요." },
-  { icon: "💰", title: "초기 수수료 0원", desc: "서비스 초기 단계에는 수수료 없이 운영됩니다." },
-  { icon: "👥", title: "신규 회원 유입", desc: "광고 없이도 모두의 헬스 회원이 헬스장을 찾아옵니다." },
-  { icon: "📊", title: "이용 흐름 파악", desc: "방문 횟수와 시간대별 이용 현황을 한눈에 확인할 수 있습니다." },
-  { icon: "✅", title: "체크인 자동 관리", desc: "QR 체크인으로 방문 기록이 자동으로 쌓입니다. 따로 정리할 필요가 없어요." },
-  { icon: "⭐", title: "초기 제휴점 우선 노출", desc: "먼저 합류한 헬스장이 앱 내 상단 노출 혜택을 가져갑니다." },
+  { icon: "🎯", title: "입점비 0원", desc: "제휴 등록에 별도 비용이 없습니다. 부담 없이 먼저 경험해보세요.", highlight: true },
+  { icon: "💰", title: "초기 수수료 0원", desc: "서비스 초기 단계에는 수수료 없이 운영됩니다.", highlight: true },
+  { icon: "👥", title: "신규 회원 유입", desc: "광고 없이도 모두의 헬스 회원이 헬스장을 찾아옵니다.", highlight: false },
+  { icon: "📊", title: "이용 흐름 파악", desc: "방문 횟수와 시간대별 이용 현황을 한눈에 확인할 수 있습니다.", highlight: false },
+  { icon: "✅", title: "체크인 자동 관리", desc: "QR 체크인으로 방문 기록이 자동으로 쌓입니다. 따로 정리할 필요가 없어요.", highlight: false },
+  { icon: "⭐", title: "초기 제휴점 우선 노출", desc: "먼저 합류한 헬스장이 앱 내 상단 노출 혜택을 가져갑니다.", highlight: false },
 ];
 
 const HOW_STEPS = [
@@ -36,24 +36,14 @@ const FAQS = [
   { q: "체크인이나 이용 현황은 어떻게 확인하나요?", a: "파트너용 대시보드에서 방문 현황, 시간대별 이용 패턴, 정산 내역을 확인할 수 있습니다." },
 ];
 
-/* ── 서울 지도 컴포넌트 ── */
+/* ── 서울 지도 ── */
 function SeoulMap() {
   return (
     <div style={{ position: "relative", borderRadius: 16, overflow: "hidden", background: "#0a1628" }}>
       <svg width="100%" viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
         <rect width="340" height="260" fill="#0a1628"/>
-
-        {/* 서울 외곽 점선 */}
-        <path
-          d="M 128,20 L 145,15 L 162,18 L 178,14 L 194,20 L 210,16 L 224,22 L 238,18 L 250,26 L 260,34 L 268,44 L 273,56 L 271,68 L 275,80 L 278,93 L 275,106 L 270,118 L 273,130 L 268,142 L 260,152 L 251,161 L 242,168 L 233,175 L 224,182 L 215,188 L 205,194 L 195,200 L 184,205 L 173,209 L 161,212 L 149,213 L 137,211 L 125,207 L 113,202 L 102,196 L 92,188 L 83,179 L 75,170 L 69,160 L 64,149 L 62,138 L 58,127 L 57,115 L 60,103 L 63,91 L 67,80 L 72,69 L 78,59 L 86,50 L 95,42 L 105,34 L 116,27 L 122,23 Z"
-          fill="rgba(29,158,117,0.05)"
-          stroke="#1d9e75"
-          strokeWidth="1.5"
-          strokeDasharray="6 4"
-          strokeLinejoin="round"
-        />
-
-        {/* 구 이름 — 처음부터 배경에 고정 */}
+        <path d="M 128,20 L 145,15 L 162,18 L 178,14 L 194,20 L 210,16 L 224,22 L 238,18 L 250,26 L 260,34 L 268,44 L 273,56 L 271,68 L 275,80 L 278,93 L 275,106 L 270,118 L 273,130 L 268,142 L 260,152 L 251,161 L 242,168 L 233,175 L 224,182 L 215,188 L 205,194 L 195,200 L 184,205 L 173,209 L 161,212 L 149,213 L 137,211 L 125,207 L 113,202 L 102,196 L 92,188 L 83,179 L 75,170 L 69,160 L 64,149 L 62,138 L 58,127 L 57,115 L 60,103 L 63,91 L 67,80 L 72,69 L 78,59 L 86,50 L 95,42 L 105,34 L 116,27 L 122,23 Z"
+          fill="rgba(29,158,117,0.05)" stroke="#1d9e75" strokeWidth="1.5" strokeDasharray="6 4" strokeLinejoin="round"/>
         <g fill="rgba(255,255,255,0.15)" fontSize="7" fontFamily="system-ui, sans-serif">
           <text x="168" y="34" textAnchor="middle">노원</text>
           <text x="144" y="42" textAnchor="middle">강북</text>
@@ -81,47 +71,79 @@ function SeoulMap() {
           <text x="98" y="193" textAnchor="middle">영등포</text>
           <text x="130" y="138" textAnchor="middle">중구</text>
         </g>
-
-        {/* 동선 라인 */}
-        <polyline style={{ fill: "none", stroke: "#1d9e75", strokeWidth: 1.5, strokeLinecap: "round", strokeDasharray: 130, strokeDashoffset: 130, animation: "drawRoute 0.6s ease 0.8s forwards" }} points="100,152 183,110"/>
-        <polyline style={{ fill: "none", stroke: "#378add", strokeWidth: 1.5, strokeLinecap: "round", strokeDasharray: 110, strokeDashoffset: 110, animation: "drawRoute 0.6s ease 1.5s forwards" }} points="183,110 228,120"/>
-        <polyline style={{ fill: "none", stroke: "#ba7517", strokeWidth: 1.5, strokeLinecap: "round", strokeDasharray: 145, strokeDashoffset: 145, animation: "drawRoute 0.6s ease 2.2s forwards" }} points="183,110 155,55"/>
-
-        {/* 펄스 */}
-        <circle style={{ fill: "none", stroke: "#1d9e75", strokeWidth: 1.5, animation: "pulse 2.4s ease-out 0.6s infinite" }} cx="100" cy="152" r="7"/>
-        <circle style={{ fill: "none", stroke: "#5dcaa5", strokeWidth: 2, animation: "pulse 2.4s ease-out 1.3s infinite" }} cx="183" cy="110" r="7"/>
-        <circle style={{ fill: "none", stroke: "#378add", strokeWidth: 1.5, animation: "pulse 2.4s ease-out 2.0s infinite" }} cx="228" cy="120" r="7"/>
-        <circle style={{ fill: "none", stroke: "#ba7517", strokeWidth: 1.5, animation: "pulse 2.4s ease-out 2.7s infinite" }} cx="155" cy="55" r="7"/>
-
-        {/* 핀 점 — 처음부터 고정 */}
+        <polyline style={{ fill:"none", stroke:"#1d9e75", strokeWidth:1.5, strokeLinecap:"round", strokeDasharray:130, strokeDashoffset:130, animation:"drawRoute 0.6s ease 0.8s forwards" }} points="100,152 183,110"/>
+        <polyline style={{ fill:"none", stroke:"#378add", strokeWidth:1.5, strokeLinecap:"round", strokeDasharray:110, strokeDashoffset:110, animation:"drawRoute 0.6s ease 1.5s forwards" }} points="183,110 228,120"/>
+        <polyline style={{ fill:"none", stroke:"#ba7517", strokeWidth:1.5, strokeLinecap:"round", strokeDasharray:145, strokeDashoffset:145, animation:"drawRoute 0.6s ease 2.2s forwards" }} points="183,110 155,55"/>
+        <circle style={{ fill:"none", stroke:"#1d9e75", strokeWidth:1.5, animation:"pulse 2.4s ease-out 0.6s infinite" }} cx="100" cy="152" r="7"/>
+        <circle style={{ fill:"none", stroke:"#5dcaa5", strokeWidth:2, animation:"pulse 2.4s ease-out 1.3s infinite" }} cx="183" cy="110" r="7"/>
+        <circle style={{ fill:"none", stroke:"#378add", strokeWidth:1.5, animation:"pulse 2.4s ease-out 2.0s infinite" }} cx="228" cy="120" r="7"/>
+        <circle style={{ fill:"none", stroke:"#ba7517", strokeWidth:1.5, animation:"pulse 2.4s ease-out 2.7s infinite" }} cx="155" cy="55" r="7"/>
         <circle cx="100" cy="152" r="5" fill="#0f6e56" stroke="#1d9e75" strokeWidth="2"/>
         <circle cx="183" cy="110" r="8" fill="#1d9e75" stroke="#5dcaa5" strokeWidth="2.5"/>
         <circle cx="228" cy="120" r="5" fill="#0c447c" stroke="#378add" strokeWidth="2"/>
         <circle cx="155" cy="55" r="4" fill="#633806" stroke="#ba7517" strokeWidth="1.5"/>
       </svg>
-
-      {/* 핀 라벨 애니메이션 */}
       {[
-        { cls: "p1", style: { left: "20%", top: "52%" }, bg: "#0f6e56", color: "#9fe1cb", label: "집 근처", delay: "0.3s" },
-        { cls: "p2", style: { left: "49%", top: "33%" }, bg: "#1d9e75", color: "#fff", label: "지금 여기", delay: "1.0s" },
-        { cls: "p3", style: { left: "63%", top: "40%" }, bg: "#0c447c", color: "#b5d4f4", label: "회사 근처", delay: "1.7s" },
-        { cls: "p4", style: { left: "39%", top: "11%" }, bg: "#633806", color: "#fac775", label: "주말", delay: "2.4s" },
+        { cls:"p1", style:{left:"20%",top:"52%"}, bg:"#0f6e56", color:"#9fe1cb", label:"집 근처", delay:"0.3s" },
+        { cls:"p2", style:{left:"49%",top:"33%"}, bg:"#1d9e75", color:"#fff", label:"지금 여기", delay:"1.0s" },
+        { cls:"p3", style:{left:"63%",top:"40%"}, bg:"#0c447c", color:"#b5d4f4", label:"회사 근처", delay:"1.7s" },
+        { cls:"p4", style:{left:"39%",top:"11%"}, bg:"#633806", color:"#fac775", label:"주말", delay:"2.4s" },
       ].map(({ cls, style, bg, color, label, delay }) => (
-        <div key={cls} style={{
-          position: "absolute", ...style,
-          display: "flex", flexDirection: "column", alignItems: "center", gap: 3,
-          opacity: 0,
-          animation: `pinPop 0.5s cubic-bezier(.34,1.56,.64,1) ${delay} forwards`,
-        }}>
-          <span style={{ fontSize: 9, fontWeight: 700, padding: "2px 8px", borderRadius: 10, whiteSpace: "nowrap", background: bg, color }}>
-            {label}
-          </span>
+        <div key={cls} style={{ position:"absolute", ...style, display:"flex", flexDirection:"column", alignItems:"center", gap:3, opacity:0, animation:`pinPop 0.5s cubic-bezier(.34,1.56,.64,1) ${delay} forwards` }}>
+          <span style={{ fontSize:9, fontWeight:700, padding:"2px 8px", borderRadius:10, whiteSpace:"nowrap", background:bg, color }}>{label}</span>
         </div>
       ))}
-
-      <p style={{ fontSize: 11, color: "#5dcaa5", textAlign: "center", padding: "10px 0 4px", fontWeight: 500 }}>
+      <p style={{ fontSize:11, color:"#5dcaa5", textAlign:"center", padding:"10px 0 4px", fontWeight:500 }}>
         하나의 멤버십 — 서울 어디서든
       </p>
+    </div>
+  );
+}
+
+/* ── 스와이프 카드 섹션 ── */
+function SwipeCards() {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const scrollRef = useRef(null);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const idx = Math.round(scrollRef.current.scrollLeft / 232);
+    setActiveIdx(idx);
+  };
+
+  return (
+    <div>
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        style={{ overflowX:"auto", WebkitOverflowScrolling:"touch", scrollbarWidth:"none", padding:"4px 24px 16px", msOverflowStyle:"none" }}
+      >
+        <div style={{ display:"flex", gap:12, width:"max-content" }}>
+          {GYM_VALUES.map((v) => (
+            <div key={v.title} style={{
+              width: 220, flexShrink: 0, borderRadius: 16, padding: "22px 20px",
+              background: v.highlight ? "#f0fdf4" : "#fff",
+              border: v.highlight ? "1.5px solid #5dcaa5" : "1.5px solid #efefef",
+              transition: "transform 0.2s, box-shadow 0.2s",
+            }}>
+              <div style={{ fontSize:"1.8rem", marginBottom:12 }}>{v.icon}</div>
+              <div style={{ fontWeight:800, fontSize:"0.95rem", marginBottom:6, color: v.highlight ? "#0f6e56" : "#0d0d0d" }}>{v.title}</div>
+              <p style={{ fontSize:"0.82rem", color:"#777", lineHeight:1.65 }}>{v.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* 점 인디케이터 */}
+      <div style={{ display:"flex", justifyContent:"center", gap:6, marginTop:4 }}>
+        {GYM_VALUES.map((_, i) => (
+          <div key={i} style={{
+            height: 6, borderRadius: 4,
+            width: activeIdx === i ? 18 : 6,
+            background: activeIdx === i ? "#16a34a" : "#ddd",
+            transition: "width 0.2s, background 0.2s",
+          }}/>
+        ))}
+      </div>
     </div>
   );
 }
@@ -152,12 +174,12 @@ function FadeIn({ children, delay = 0 }) {
 function FAQ({ q, a }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ borderBottom: "1px solid #f0f0f0" }}>
-      <button onClick={() => setOpen(!open)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 0", background: "none", border: "none", cursor: "pointer", textAlign: "left" }}>
-        <span style={{ fontSize: "0.95rem", fontWeight: 600, color: "#111" }}>{q}</span>
-        <span style={{ fontSize: "1.1rem", color: "#16a34a", display: "inline-block", transform: open ? "rotate(45deg)" : "none", transition: "transform 0.2s", flexShrink: 0, marginLeft: 16 }}>+</span>
+    <div style={{ borderBottom:"1px solid #f0f0f0" }}>
+      <button onClick={() => setOpen(!open)} style={{ width:"100%", display:"flex", justifyContent:"space-between", alignItems:"center", padding:"20px 0", background:"none", border:"none", cursor:"pointer", textAlign:"left" }}>
+        <span style={{ fontSize:"0.95rem", fontWeight:600, color:"#111" }}>{q}</span>
+        <span style={{ fontSize:"1.1rem", color:"#16a34a", display:"inline-block", transform:open?"rotate(45deg)":"none", transition:"transform 0.2s", flexShrink:0, marginLeft:16 }}>+</span>
       </button>
-      {open && <p style={{ fontSize: "0.875rem", color: "#666", paddingBottom: 20, lineHeight: 1.75, margin: 0 }}>{a}</p>}
+      {open && <p style={{ fontSize:"0.875rem", color:"#666", paddingBottom:20, lineHeight:1.75, margin:0 }}>{a}</p>}
     </div>
   );
 }
@@ -165,9 +187,6 @@ function FAQ({ q, a }) {
 /* ── 메인 ── */
 export default function App() {
   const [navSolid, setNavSolid] = useState(false);
-  const [form, setForm] = useState({ name: "", gym: "", contact: "", note: "" });
-  const [formStatus, setFormStatus] = useState("idle");
-  const [formError, setFormError] = useState("");
   const [email, setEmail] = useState("");
   const [notifyStatus, setNotifyStatus] = useState("idle");
   const [notifyError, setNotifyError] = useState("");
@@ -177,28 +196,6 @@ export default function App() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  async function handlePartnerSubmit() {
-    if (!form.name.trim() || !form.gym.trim() || !form.contact.trim()) {
-      setFormError("성함, 헬스장 이름, 연락처는 필수 항목입니다.");
-      setFormStatus("error");
-      return;
-    }
-    setFormStatus("loading");
-    setFormError("");
-    try {
-      const { error } = await supabase.from("partner_inquiries").insert([{
-        name: form.name.trim(), gym: form.gym.trim(),
-        contact: form.contact.trim(), note: form.note.trim() || null,
-      }]);
-      if (error) throw error;
-      setFormStatus("success");
-    } catch (err) {
-      console.error(err);
-      setFormError("저장 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
-      setFormStatus("error");
-    }
-  }
 
   async function handleNotifySubmit() {
     const trimmed = email.trim();
@@ -226,144 +223,127 @@ export default function App() {
     black: "#0d0d0d", gray1: "#444", gray2: "#777", gray3: "#bbb",
     gray4: "#f7f7f7", white: "#fff",
   };
-  const inputStyle = { width: "100%", border: "1.5px solid #e0e0e0", borderRadius: 10, padding: "11px 14px", fontSize: "0.875rem", color: s.black, background: "#fafafa" };
 
   return (
-    <div style={{ fontFamily: "'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif", color: s.black, background: s.white, overflowX: "hidden" }}>
+    <div style={{ fontFamily:"'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif", color:s.black, background:s.white, overflowX:"hidden" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         a { text-decoration: none; color: inherit; }
         button, input, textarea { font-family: inherit; }
-
         @keyframes pinPop {
-          0%   { opacity: 0; transform: translateY(10px) scale(0.3); }
-          65%  { opacity: 1; transform: translateY(-4px) scale(1.2); }
-          100% { opacity: 1; transform: translateY(0) scale(1); }
+          0%   { opacity:0; transform:translateY(10px) scale(0.3); }
+          65%  { opacity:1; transform:translateY(-4px) scale(1.2); }
+          100% { opacity:1; transform:translateY(0) scale(1); }
         }
         @keyframes pulse {
-          0%   { r: 7; opacity: 0.6; }
-          70%  { r: 20; opacity: 0; }
-          100% { r: 20; opacity: 0; }
+          0%   { r:7; opacity:0.6; }
+          70%  { r:20; opacity:0; }
+          100% { r:20; opacity:0; }
         }
-        @keyframes drawRoute { to { stroke-dashoffset: 0; } }
-
+        @keyframes drawRoute { to { stroke-dashoffset:0; } }
         .btn-primary {
-          background: #16a34a; color: #fff; font-weight: 700;
-          padding: 14px 28px; border-radius: 12px; border: none; cursor: pointer;
-          font-size: 0.95rem; transition: background 0.2s, transform 0.15s; display: inline-block;
+          background:#16a34a; color:#fff; font-weight:700;
+          padding:14px 28px; border-radius:12px; border:none; cursor:pointer;
+          font-size:0.95rem; transition:background 0.2s, transform 0.15s; display:inline-block;
         }
-        .btn-primary:hover:not(:disabled) { background: #15803d; transform: translateY(-1px); }
-        .btn-primary:disabled { background: #86efac; cursor: not-allowed; }
+        .btn-primary:hover { background:#15803d; transform:translateY(-1px); }
         .btn-ghost {
-          background: #fff; color: #333; font-weight: 600;
-          padding: 14px 28px; border-radius: 12px; border: 1.5px solid #ddd; cursor: pointer;
-          font-size: 0.95rem; transition: border-color 0.2s, color 0.2s, transform 0.15s; display: inline-block;
+          background:transparent; color:#333; font-weight:600;
+          padding:14px 28px; border-radius:12px; border:1.5px solid #ddd; cursor:pointer;
+          font-size:0.95rem; transition:border-color 0.2s, color 0.2s, transform 0.15s; display:inline-block;
         }
-        .btn-ghost:hover { border-color: #16a34a; color: #16a34a; transform: translateY(-1px); }
-        .card { background: #fff; border: 1.5px solid #efefef; border-radius: 16px; padding: 28px 24px; transition: box-shadow 0.2s, transform 0.2s; }
-        .card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.07); transform: translateY(-3px); }
-        .section-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: #16a34a; display: block; margin-bottom: 10px; }
-        input:focus, textarea:focus { outline: none; border-color: #16a34a !important; }
-        @media (max-width: 768px) {
-          .hide-mobile { display: none !important; }
-          .grid-2col { grid-template-columns: 1fr !important; }
-          .hero-btns { flex-direction: column !important; }
-          .hero-btns a { text-align: center; }
+        .btn-ghost:hover { border-color:#16a34a; color:#16a34a; transform:translateY(-1px); }
+        .section-label { font-size:0.7rem; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:#16a34a; display:block; margin-bottom:10px; }
+        input:focus, textarea:focus { outline:none; border-color:#16a34a !important; }
+        .swipe-wrap::-webkit-scrollbar { display:none; }
+        @media (max-width:768px) {
+          .hide-mobile { display:none !important; }
+          .hero-btns { flex-direction:column !important; }
+          .hero-btns a { text-align:center; }
         }
       `}</style>
 
       {/* ── NAV ── */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: navSolid ? "rgba(255,255,255,0.96)" : "transparent", backdropFilter: navSolid ? "blur(12px)" : "none", borderBottom: navSolid ? "1px solid #f0f0f0" : "none", transition: "all 0.3s" }}>
-        <div style={{ maxWidth: 1080, margin: "0 auto", padding: "0 24px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <a href="#" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 30, height: 30, borderRadius: 8, background: s.green, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 900, fontSize: 13 }}>모</div>
-            <span style={{ fontWeight: 800, fontSize: "1rem" }}>모두의 헬스</span>
+      <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:100, background:navSolid?"rgba(255,255,255,0.96)":"transparent", backdropFilter:navSolid?"blur(12px)":"none", borderBottom:navSolid?"1px solid #f0f0f0":"none", transition:"all 0.3s" }}>
+        <div style={{ maxWidth:1080, margin:"0 auto", padding:"0 24px", height:60, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+          <a href="/" style={{ display:"flex", alignItems:"center", gap:8 }}>
+            <div style={{ width:30, height:30, borderRadius:8, background:s.green, display:"flex", alignItems:"center", justifyContent:"center", color:"#fff", fontWeight:900, fontSize:13 }}>모</div>
+            <span style={{ fontWeight:800, fontSize:"1rem" }}>모두의 헬스</span>
           </a>
-          <div className="hide-mobile" style={{ display: "flex", gap: 32 }}>
+          <div className="hide-mobile" style={{ display:"flex", gap:32 }}>
             {[["파트너 혜택","#values"],["운영 방식","#how"],["선점 혜택","#early"],["FAQ","#faq"]].map(([l,h]) => (
-              <a key={l} href={h} style={{ fontSize: "0.875rem", color: s.gray1, fontWeight: 500 }}>{l}</a>
+              <a key={l} href={h} style={{ fontSize:"0.875rem", color:s.gray1, fontWeight:500 }}>{l}</a>
             ))}
           </div>
-          <a href="#partner-form" className="btn-primary" style={{ padding: "9px 20px", fontSize: "0.85rem", borderRadius: 10 }}>제휴 문의 →</a>
+          <a href="/partner" className="btn-primary" style={{ padding:"9px 20px", fontSize:"0.85rem", borderRadius:10 }}>제휴 문의 →</a>
         </div>
       </nav>
 
       {/* ── HERO ── */}
-      <section style={{ background: "#0a1628", padding: "100px 24px 60px", textAlign: "center" }}>
-        <div style={{ maxWidth: 680, margin: "0 auto" }}>
-          <div style={{ marginBottom: 20 }}>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(29,158,117,0.2)", color: "#5dcaa5", fontSize: "0.78rem", fontWeight: 700, padding: "5px 14px", borderRadius: 100, letterSpacing: "0.04em" }}>
+      <section style={{ background:"#0a1628", padding:"100px 24px 60px", textAlign:"center" }}>
+        <div style={{ maxWidth:680, margin:"0 auto" }}>
+          <div style={{ marginBottom:20 }}>
+            <span style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(29,158,117,0.2)", color:"#5dcaa5", fontSize:"0.78rem", fontWeight:700, padding:"5px 14px", borderRadius:100, letterSpacing:"0.04em" }}>
               🤝 초기 제휴 파트너 모집 중
             </span>
           </div>
-          <h1 style={{ fontSize: "clamp(1.9rem, 5vw, 3rem)", fontWeight: 900, lineHeight: 1.25, color: "#fff", marginBottom: 16 }}>
+          <h1 style={{ fontSize:"clamp(1.9rem, 5vw, 3rem)", fontWeight:900, lineHeight:1.25, color:"#fff", marginBottom:16 }}>
             여러 헬스장을<br />
-            <span style={{ color: "#1d9e75" }}>하나의 멤버십</span>으로 연결합니다
+            <span style={{ color:"#1d9e75" }}>하나의 멤버십</span>으로 연결합니다
           </h1>
-          <p style={{ fontSize: "1rem", color: "#8892a4", lineHeight: 1.8, marginBottom: 10 }}>
+          <p style={{ fontSize:"1rem", color:"#8892a4", lineHeight:1.8, marginBottom:10 }}>
             회원에게는 더 유연한 운동 경험을,<br />
             헬스장에는 새로운 유입과 운영 효율을 드립니다.
           </p>
-          <p style={{ fontSize: "0.85rem", color: "#1d9e75", fontWeight: 700, marginBottom: 32 }}>
+          <p style={{ fontSize:"0.85rem", color:"#1d9e75", fontWeight:700, marginBottom:32 }}>
             입점비 0원 · 초기 수수료 0원 · 초기 제휴점 우선 노출
           </p>
-          <div className="hero-btns" style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginBottom: 48 }}>
-            <a href="#partner-form" className="btn-primary" style={{ fontSize: "1rem", padding: "16px 36px" }}>🏋️ 제휴 문의하기</a>
-            <a href="#notify" className="btn-ghost" style={{ fontSize: "1rem", padding: "16px 32px", background: "transparent", color: "#aab4c4", borderColor: "rgba(255,255,255,0.15)" }}>오픈 알림 신청하기</a>
+          <div className="hero-btns" style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap", marginBottom:48 }}>
+            <a href="/partner" className="btn-primary" style={{ fontSize:"1rem", padding:"16px 36px" }}>🏋️ 제휴 문의하기</a>
+            <a href="#notify" className="btn-ghost" style={{ fontSize:"1rem", padding:"16px 32px", background:"transparent", color:"#aab4c4", borderColor:"rgba(255,255,255,0.15)" }}>오픈 알림 신청하기</a>
           </div>
-
-          {/* 서울 지도 */}
-          <div style={{ maxWidth: 420, margin: "0 auto" }}>
+          <div style={{ maxWidth:420, margin:"0 auto" }}>
             <SeoulMap />
           </div>
         </div>
       </section>
 
-      {/* ── 점주 가치 제안 ── */}
-      <section id="values" style={{ padding: "88px 24px", background: s.white }}>
-        <div style={{ maxWidth: 980, margin: "0 auto" }}>
-          <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <span className="section-label">헬스장 파트너 혜택</span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 900, lineHeight: 1.3, marginBottom: 12 }}>새로운 유입부터<br />운영 효율까지</h2>
-              <p style={{ fontSize: "0.95rem", color: s.gray2, maxWidth: 480, margin: "0 auto" }}>
-                광고비 없이 회원을 받고, 방문 현황을 파악하고,<br />정산까지 한 흐름으로 관리할 수 있습니다.
-              </p>
-            </div>
-          </FadeIn>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
-            {GYM_VALUES.map((v, i) => (
-              <FadeIn key={v.title} delay={i * 0.07}>
-                <div className="card">
-                  <div style={{ fontSize: "2rem", marginBottom: 14 }}>{v.icon}</div>
-                  <div style={{ fontWeight: 800, fontSize: "1rem", marginBottom: 8 }}>{v.title}</div>
-                  <p style={{ fontSize: "0.85rem", color: s.gray2, lineHeight: 1.7 }}>{v.desc}</p>
-                </div>
-              </FadeIn>
-            ))}
+      {/* ── 파트너 혜택 스와이프 ── */}
+      <section id="values" style={{ padding:"80px 0 72px", background:s.white }}>
+        <FadeIn>
+          <div style={{ textAlign:"center", marginBottom:40, padding:"0 24px" }}>
+            <span className="section-label">헬스장 파트너 혜택</span>
+            <h2 style={{ fontSize:"clamp(1.6rem, 4vw, 2.4rem)", fontWeight:900, lineHeight:1.3, marginBottom:10 }}>
+              새로운 유입부터<br />운영 효율까지
+            </h2>
+            <p style={{ fontSize:"0.9rem", color:s.gray2 }}>← 밀어서 더 보기</p>
           </div>
+        </FadeIn>
+        <SwipeCards />
+        <div style={{ textAlign:"center", marginTop:32, padding:"0 24px" }}>
+          <a href="/partner" className="btn-primary" style={{ fontSize:"0.95rem", padding:"14px 32px" }}>제휴 문의하기 →</a>
         </div>
       </section>
 
       {/* ── 운영 방식 ── */}
-      <section id="how" style={{ padding: "88px 24px", background: s.gray4 }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+      <section id="how" style={{ padding:"88px 24px", background:s.gray4 }}>
+        <div style={{ maxWidth:900, margin:"0 auto" }}>
           <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <div style={{ textAlign:"center", marginBottom:56 }}>
               <span className="section-label">운영 방식</span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 900, marginBottom: 12 }}>3단계로 끝납니다</h2>
-              <p style={{ fontSize: "0.95rem", color: s.gray2 }}>복잡한 절차 없이, 기존 운영 방식 그대로 유지하면 됩니다.</p>
+              <h2 style={{ fontSize:"clamp(1.6rem, 4vw, 2.4rem)", fontWeight:900, marginBottom:12 }}>3단계로 끝납니다</h2>
+              <p style={{ fontSize:"0.95rem", color:s.gray2 }}>복잡한 절차 없이, 기존 운영 방식 그대로 유지하면 됩니다.</p>
             </div>
           </FadeIn>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(240px, 1fr))", gap:24 }}>
             {HOW_STEPS.map((step, i) => (
               <FadeIn key={step.n} delay={i * 0.1}>
-                <div style={{ background: "#fff", borderRadius: 16, padding: "32px 24px", border: "1.5px solid #efefef" }}>
-                  <div style={{ width: 40, height: 40, borderRadius: 10, background: s.green, color: "#fff", fontWeight: 900, fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>{step.n}</div>
-                  <div style={{ fontWeight: 700, fontSize: "1rem", marginBottom: 10 }}>{step.title}</div>
-                  <p style={{ fontSize: "0.85rem", color: s.gray2, lineHeight: 1.7 }}>{step.desc}</p>
+                <div style={{ background:"#fff", borderRadius:16, padding:"32px 24px", border:"1.5px solid #efefef" }}>
+                  <div style={{ width:40, height:40, borderRadius:10, background:s.green, color:"#fff", fontWeight:900, fontSize:"1rem", display:"flex", alignItems:"center", justifyContent:"center", marginBottom:16 }}>{step.n}</div>
+                  <div style={{ fontWeight:700, fontSize:"1rem", marginBottom:10 }}>{step.title}</div>
+                  <p style={{ fontSize:"0.85rem", color:s.gray2, lineHeight:1.7 }}>{step.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -372,85 +352,85 @@ export default function App() {
       </section>
 
       {/* ── 왜 지금인가 ── */}
-      <section id="early" style={{ padding: "88px 24px", background: "#0a1628" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+      <section id="early" style={{ padding:"88px 24px", background:"#0a1628" }}>
+        <div style={{ maxWidth:900, margin:"0 auto" }}>
           <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <span style={{ fontSize: "0.7rem", fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase", color: "#4ade80", display: "block", marginBottom: 10 }}>왜 지금인가</span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 900, color: "#fff", lineHeight: 1.3, marginBottom: 12 }}>초기 파트너가<br />먼저 기회를 가져갑니다</h2>
-              <p style={{ fontSize: "0.95rem", color: "#888", maxWidth: 460, margin: "0 auto" }}>지금 합류하면 지역 내 노출과 유입 기회를 먼저 선점할 수 있습니다.</p>
+            <div style={{ textAlign:"center", marginBottom:56 }}>
+              <span style={{ fontSize:"0.7rem", fontWeight:800, letterSpacing:"0.2em", textTransform:"uppercase", color:"#4ade80", display:"block", marginBottom:10 }}>왜 지금인가</span>
+              <h2 style={{ fontSize:"clamp(1.6rem, 4vw, 2.4rem)", fontWeight:900, color:"#fff", lineHeight:1.3, marginBottom:12 }}>초기 파트너가<br />먼저 기회를 가져갑니다</h2>
+              <p style={{ fontSize:"0.95rem", color:"#888", maxWidth:460, margin:"0 auto" }}>지금 합류하면 지역 내 노출과 유입 기회를 먼저 선점할 수 있습니다.</p>
             </div>
           </FadeIn>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20, marginBottom: 48 }}>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(240px, 1fr))", gap:20, marginBottom:48 }}>
             {EARLY_REASONS.map((item, i) => (
               <FadeIn key={item.title} delay={i * 0.1}>
-                <div style={{ background: "#1a1a1a", border: "1px solid #2a2a2a", borderRadius: 16, padding: "28px 24px", transition: "border-color 0.2s" }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = "#16a34a"}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = "#2a2a2a"}>
-                  <div style={{ fontSize: "1.8rem", marginBottom: 14 }}>{item.icon}</div>
-                  <div style={{ fontWeight: 700, fontSize: "0.95rem", color: "#fff", marginBottom: 8 }}>{item.title}</div>
-                  <p style={{ fontSize: "0.85rem", color: "#777", lineHeight: 1.7 }}>{item.desc}</p>
+                <div style={{ background:"#1a1a1a", border:"1px solid #2a2a2a", borderRadius:16, padding:"28px 24px", transition:"border-color 0.2s" }}
+                  onMouseEnter={e => e.currentTarget.style.borderColor="#16a34a"}
+                  onMouseLeave={e => e.currentTarget.style.borderColor="#2a2a2a"}>
+                  <div style={{ fontSize:"1.8rem", marginBottom:14 }}>{item.icon}</div>
+                  <div style={{ fontWeight:700, fontSize:"0.95rem", color:"#fff", marginBottom:8 }}>{item.title}</div>
+                  <p style={{ fontSize:"0.85rem", color:"#777", lineHeight:1.7 }}>{item.desc}</p>
                 </div>
               </FadeIn>
             ))}
           </div>
           <FadeIn>
-            <div style={{ textAlign: "center" }}>
-              <a href="#partner-form" className="btn-primary" style={{ fontSize: "1rem", padding: "16px 36px" }}>지금 제휴 문의하기 →</a>
+            <div style={{ textAlign:"center" }}>
+              <a href="/partner" className="btn-primary" style={{ fontSize:"1rem", padding:"16px 36px" }}>지금 제휴 문의하기 →</a>
             </div>
           </FadeIn>
         </div>
       </section>
 
       {/* ── 일반 사용자 ── */}
-      <section style={{ padding: "88px 24px", background: s.greenLight }}>
-        <div style={{ maxWidth: 680, margin: "0 auto", textAlign: "center" }}>
+      <section style={{ padding:"88px 24px", background:s.greenLight }}>
+        <div style={{ maxWidth:680, margin:"0 auto", textAlign:"center" }}>
           <FadeIn>
             <span className="section-label">일반 회원 안내</span>
-            <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.3rem)", fontWeight: 900, lineHeight: 1.3, marginBottom: 16 }}>
+            <h2 style={{ fontSize:"clamp(1.6rem, 4vw, 2.3rem)", fontWeight:900, lineHeight:1.3, marginBottom:16 }}>
               한 번의 멤버십으로<br />서울 어디서든 운동하세요
             </h2>
-            <p style={{ fontSize: "0.95rem", color: s.gray1, lineHeight: 1.85, marginBottom: 32, maxWidth: 500, margin: "0 auto 32px" }}>
+            <p style={{ fontSize:"0.95rem", color:s.gray1, lineHeight:1.85, marginBottom:32, maxWidth:500, margin:"0 auto 32px" }}>
               연간권 없이, 한 달씩. 집 근처든 회사 근처든<br />
               가장 가까운 제휴 헬스장을 자유롭게 이용하는<br />
               서비스를 준비하고 있습니다.
             </p>
-            <div style={{ display: "inline-flex", gap: 32, background: "#fff", borderRadius: 20, padding: "24px 40px", border: "1.5px solid #dcfce7", marginBottom: 32, flexWrap: "wrap", justifyContent: "center" }}>
+            <div style={{ display:"inline-flex", gap:32, background:"#fff", borderRadius:20, padding:"24px 40px", border:"1.5px solid #dcfce7", marginBottom:32, flexWrap:"wrap", justifyContent:"center" }}>
               {[["📅","월 단위 이용"],["📍","서울 제휴 헬스장"],["💳","월 50,000원"]].map(([icon, label]) => (
-                <div key={label} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: "1.6rem", marginBottom: 6 }}>{icon}</div>
-                  <div style={{ fontSize: "0.82rem", fontWeight: 700, color: s.gray1 }}>{label}</div>
+                <div key={label} style={{ textAlign:"center" }}>
+                  <div style={{ fontSize:"1.6rem", marginBottom:6 }}>{icon}</div>
+                  <div style={{ fontSize:"0.82rem", fontWeight:700, color:s.gray1 }}>{label}</div>
                 </div>
               ))}
             </div>
-            <p style={{ fontSize: "0.88rem", color: s.gray2, marginBottom: 24 }}>아직 서비스 오픈 전입니다. 오픈 시 가장 먼저 안내받고 싶다면 알림을 신청해주세요.</p>
-            <a href="#notify" className="btn-ghost" style={{ fontSize: "0.95rem" }}>오픈 알림 신청하기</a>
+            <p style={{ fontSize:"0.88rem", color:s.gray2, marginBottom:24 }}>아직 서비스 오픈 전입니다. 오픈 시 가장 먼저 안내받고 싶다면 알림을 신청해주세요.</p>
+            <a href="#notify" className="btn-ghost" style={{ fontSize:"0.95rem" }}>오픈 알림 신청하기</a>
           </FadeIn>
         </div>
       </section>
 
       {/* ── 오픈 알림 ── */}
-      <section id="notify" style={{ padding: "72px 24px", background: s.white, borderTop: "1px solid #f0f0f0" }}>
-        <div style={{ maxWidth: 500, margin: "0 auto", textAlign: "center" }}>
+      <section id="notify" style={{ padding:"72px 24px", background:s.white, borderTop:"1px solid #f0f0f0" }}>
+        <div style={{ maxWidth:500, margin:"0 auto", textAlign:"center" }}>
           <FadeIn>
-            <h2 style={{ fontSize: "1.7rem", fontWeight: 900, marginBottom: 10 }}>오픈 알림 신청</h2>
-            <p style={{ fontSize: "0.9rem", color: s.gray2, marginBottom: 28 }}>서울 오픈 소식을 가장 먼저 알려드릴게요.</p>
+            <h2 style={{ fontSize:"1.7rem", fontWeight:900, marginBottom:10 }}>오픈 알림 신청</h2>
+            <p style={{ fontSize:"0.9rem", color:s.gray2, marginBottom:28 }}>서울 오픈 소식을 가장 먼저 알려드릴게요.</p>
             {notifyStatus !== "success" ? (
               <>
-                <div style={{ maxWidth: 420, margin: "0 auto" }}>
+                <div style={{ maxWidth:420, margin:"0 auto" }}>
                   <input type="email" value={email} onChange={e => setEmail(e.target.value)}
                     onKeyDown={e => e.key === "Enter" && handleNotifySubmit()}
                     placeholder="이메일 주소" disabled={notifyStatus === "loading"}
-                    style={{ width: "100%", border: "1.5px solid #e0e0e0", borderRadius: 10, padding: "13px 16px", fontSize: "0.9rem", marginBottom: 10 }} />
+                    style={{ width:"100%", border:"1.5px solid #e0e0e0", borderRadius:10, padding:"13px 16px", fontSize:"0.9rem", marginBottom:10 }} />
                   <button onClick={handleNotifySubmit} disabled={notifyStatus === "loading"}
-                    className="btn-primary" style={{ width: "100%", padding: "13px 20px", borderRadius: 10 }}>
+                    className="btn-primary" style={{ width:"100%", padding:"13px 20px", borderRadius:10 }}>
                     {notifyStatus === "loading" ? "..." : "오픈 알림 신청하기"}
                   </button>
                 </div>
-                {notifyStatus === "error" && <div style={{ marginTop: 10, fontSize: "0.82rem", color: "#dc2626" }}>⚠️ {notifyError}</div>}
+                {notifyStatus === "error" && <div style={{ marginTop:10, fontSize:"0.82rem", color:"#dc2626" }}>⚠️ {notifyError}</div>}
               </>
             ) : (
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: s.greenLight, color: s.green, fontWeight: 700, padding: "14px 24px", borderRadius: 12, fontSize: "0.9rem" }}>
+              <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:s.greenLight, color:s.green, fontWeight:700, padding:"14px 24px", borderRadius:12, fontSize:"0.9rem" }}>
                 ✓ 신청 완료! 오픈 소식을 가장 먼저 알려드릴게요.
               </div>
             )}
@@ -459,103 +439,53 @@ export default function App() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" style={{ padding: "88px 24px", background: s.gray4 }}>
-        <div style={{ maxWidth: 640, margin: "0 auto" }}>
+      <section id="faq" style={{ padding:"88px 24px", background:s.gray4 }}>
+        <div style={{ maxWidth:640, margin:"0 auto" }}>
           <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <div style={{ textAlign:"center", marginBottom:48 }}>
               <span className="section-label">FAQ</span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.2rem)", fontWeight: 900 }}>자주 묻는 질문</h2>
+              <h2 style={{ fontSize:"clamp(1.6rem, 4vw, 2.2rem)", fontWeight:900 }}>자주 묻는 질문</h2>
             </div>
           </FadeIn>
-          <div style={{ background: "#fff", borderRadius: 20, padding: "8px 32px", border: "1.5px solid #efefef" }}>
+          <div style={{ background:"#fff", borderRadius:20, padding:"8px 32px", border:"1.5px solid #efefef" }}>
             {FAQS.map(f => <FAQ key={f.q} q={f.q} a={f.a} />)}
           </div>
         </div>
       </section>
 
       {/* ── 마지막 CTA ── */}
-      <section style={{ padding: "100px 24px", background: s.green, textAlign: "center" }}>
-        <div style={{ maxWidth: 640, margin: "0 auto" }}>
+      <section style={{ padding:"100px 24px", background:s.green, textAlign:"center" }}>
+        <div style={{ maxWidth:640, margin:"0 auto" }}>
           <FadeIn>
-            <p style={{ fontSize: "0.78rem", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.65)", marginBottom: 16 }}>초기 제휴 파트너 모집</p>
-            <h2 style={{ fontSize: "clamp(1.8rem, 4.5vw, 2.8rem)", fontWeight: 900, color: "#fff", lineHeight: 1.25, marginBottom: 16 }}>
+            <p style={{ fontSize:"0.78rem", fontWeight:800, letterSpacing:"0.18em", textTransform:"uppercase", color:"rgba(255,255,255,0.65)", marginBottom:16 }}>초기 제휴 파트너 모집</p>
+            <h2 style={{ fontSize:"clamp(1.8rem, 4.5vw, 2.8rem)", fontWeight:900, color:"#fff", lineHeight:1.25, marginBottom:16 }}>
               지금, 초기 파트너로<br />함께하세요
             </h2>
-            <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.8)", lineHeight: 1.8, marginBottom: 40, maxWidth: 480, margin: "0 auto 40px" }}>
+            <p style={{ fontSize:"1rem", color:"rgba(255,255,255,0.8)", lineHeight:1.8, marginBottom:40, maxWidth:480, margin:"0 auto 40px" }}>
               입점비와 초기 수수료 없이 먼저 경험해보세요.<br />유입과 운영 효율을 함께 만들어갑니다.
             </p>
-            <a href="#partner-form"
-              style={{ display: "inline-block", background: "#fff", color: s.green, fontWeight: 800, fontSize: "1rem", padding: "16px 40px", borderRadius: 14, boxShadow: "0 4px 24px rgba(0,0,0,0.12)", transition: "transform 0.15s, box-shadow 0.15s" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.16)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.12)"; }}>
+            <a href="/partner"
+              style={{ display:"inline-block", background:"#fff", color:s.green, fontWeight:800, fontSize:"1rem", padding:"16px 40px", borderRadius:14, boxShadow:"0 4px 24px rgba(0,0,0,0.12)", transition:"transform 0.15s, box-shadow 0.15s" }}
+              onMouseEnter={e => { e.currentTarget.style.transform="translateY(-2px)"; e.currentTarget.style.boxShadow="0 8px 32px rgba(0,0,0,0.16)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="0 4px 24px rgba(0,0,0,0.12)"; }}>
               제휴 문의하기 →
             </a>
           </FadeIn>
         </div>
       </section>
 
-      {/* ── 제휴 문의 폼 ── */}
-      <section id="partner-form" style={{ padding: "88px 24px", background: s.white }}>
-        <div style={{ maxWidth: 580, margin: "0 auto" }}>
-          <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: 40 }}>
-              <span className="section-label">제휴 문의</span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.2rem)", fontWeight: 900, marginBottom: 12 }}>함께 성장할 파트너를<br />찾고 있습니다</h2>
-              <p style={{ fontSize: "0.9rem", color: s.gray1 }}>문의 주시면 48시간 내 연락드리겠습니다.</p>
-            </div>
-          </FadeIn>
-          {formStatus !== "success" ? (
-            <FadeIn delay={0.1}>
-              <div style={{ background: s.gray4, borderRadius: 20, padding: 36, border: "1.5px solid #efefef" }}>
-                <div className="grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-                  {[{ label: "담당자 성함", key: "name", placeholder: "홍길동" }, { label: "헬스장 이름", key: "gym", placeholder: "○○ 헬스클럽" }].map(({ label, key, placeholder }) => (
-                    <div key={key}>
-                      <label style={{ fontSize: "0.82rem", fontWeight: 700, color: s.gray1, display: "block", marginBottom: 6 }}>{label} *</label>
-                      <input value={form[key]} onChange={e => setForm({ ...form, [key]: e.target.value })} placeholder={placeholder} disabled={formStatus === "loading"} style={inputStyle} />
-                    </div>
-                  ))}
-                </div>
-                <div style={{ marginBottom: 16 }}>
-                  <label style={{ fontSize: "0.82rem", fontWeight: 700, color: s.gray1, display: "block", marginBottom: 6 }}>연락처 (이메일 또는 전화) *</label>
-                  <input value={form.contact} onChange={e => setForm({ ...form, contact: e.target.value })} placeholder="contact@gym.kr" disabled={formStatus === "loading"} style={inputStyle} />
-                </div>
-                <div style={{ marginBottom: 24 }}>
-                  <label style={{ fontSize: "0.82rem", fontWeight: 700, color: s.gray1, display: "block", marginBottom: 6 }}>문의 내용 <span style={{ color: s.gray3, fontWeight: 400 }}>(선택)</span></label>
-                  <textarea rows={3} value={form.note} onChange={e => setForm({ ...form, note: e.target.value })} placeholder="헬스장 위치, 규모, 궁금한 점 등을 자유롭게 적어주세요." disabled={formStatus === "loading"} style={{ ...inputStyle, resize: "vertical" }} />
-                </div>
-                <button onClick={handlePartnerSubmit} disabled={formStatus === "loading"} className="btn-primary" style={{ width: "100%", padding: "15px", fontSize: "1rem" }}>
-                  {formStatus === "loading" ? "전송 중..." : "제휴 문의 보내기"}
-                </button>
-                {formStatus === "error" && (
-                  <div style={{ marginTop: 12, padding: "11px 16px", background: "#fff5f5", border: "1.5px solid #fecaca", borderRadius: 10, fontSize: "0.875rem", color: "#dc2626" }}>⚠️ {formError}</div>
-                )}
-                <p style={{ textAlign: "center", fontSize: "0.75rem", color: s.gray3, marginTop: 12 }}>입력하신 정보는 제휴 문의 목적으로만 사용됩니다.</p>
-              </div>
-            </FadeIn>
-          ) : (
-            <FadeIn>
-              <div style={{ background: s.greenLight, borderRadius: 20, padding: "48px 36px", textAlign: "center", border: "1.5px solid #dcfce7" }}>
-                <div style={{ fontSize: "3rem", marginBottom: 16 }}>🎉</div>
-                <h3 style={{ fontWeight: 800, fontSize: "1.2rem", marginBottom: 8 }}>문의가 접수되었습니다!</h3>
-                <p style={{ fontSize: "0.875rem", color: s.gray1 }}>48시간 내로 담당자가 연락드릴게요.</p>
-              </div>
-            </FadeIn>
-          )}
-        </div>
-      </section>
-
       {/* ── FOOTER ── */}
-      <footer style={{ background: "#0d0d0d", padding: "40px 24px" }}>
-        <div style={{ maxWidth: 1080, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 28, height: 28, borderRadius: 7, background: s.green, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 900, fontSize: 12 }}>모</div>
+      <footer style={{ background:"#0d0d0d", padding:"40px 24px" }}>
+        <div style={{ maxWidth:1080, margin:"0 auto", display:"flex", flexWrap:"wrap", alignItems:"center", justifyContent:"space-between", gap:16 }}>
+          <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+            <div style={{ width:28, height:28, borderRadius:7, background:s.green, display:"flex", alignItems:"center", justifyContent:"center", color:"#fff", fontWeight:900, fontSize:12 }}>모</div>
             <div>
-              <div style={{ fontWeight: 800, color: "#fff", fontSize: "0.9rem" }}>모두의 헬스</div>
-              <div style={{ fontSize: "0.72rem", color: "#555" }}>서울 초기 파트너 모집 중</div>
+              <div style={{ fontWeight:800, color:"#fff", fontSize:"0.9rem" }}>모두의 헬스</div>
+              <div style={{ fontSize:"0.72rem", color:"#555" }}>서울 초기 파트너 모집 중</div>
             </div>
           </div>
-          <div style={{ fontSize: "0.82rem", color: "#555" }}>제휴 문의 <span style={{ color: "#888" }}>contact@moduhealth.kr</span></div>
-          <div style={{ fontSize: "0.75rem", color: "#444" }}>© 2025 모두의 헬스</div>
+          <div style={{ fontSize:"0.82rem", color:"#555" }}>제휴 문의 <span style={{ color:"#888" }}>contact@moduhealth.kr</span></div>
+          <div style={{ fontSize:"0.75rem", color:"#444" }}>© 2025 모두의 헬스</div>
         </div>
       </footer>
     </div>
